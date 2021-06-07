@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        nav{
+            height: 40px;
+            width: 100vw;
+            margin: auto;
+            background-color: blue;
+
+        }
+        nav>div{
+            font-size: 20px;
+            float: right;
+            margin-right: 20px;
+        }
+        #signup{
+           
+          
+            width: 40vw;
+            margin: auto;
+            background-color: aqua;
+            text-align: center;
+        }
+        #log{
+           text-align: center;
+           
+        }
+        #log>input{
+            margin-bottom: 5px;
+            height: 20px;
+        }
+        #sub{
+            height: 30px;
+            margin-top: 10px;
+            background-color: blue;
+            color: white;
+        }
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <div>Login</div>
+        <div>Signup</div>
+        <div>Menu</div>
+    </nav>
+
+    <div id="signup">
+        <h1>Login</h1>
+        <form id="log">
+           
+            <input type="email" id="email" placeholder="Email">
+            
+            <input type="password" id="password" placeholder="Password">
+        </form>
+        <button id="sub" onclick="loginCred()">Submit</button>
+    </div>
+</body>
+<script>
+    function loginCred(){
+        let form = document.getElementById('log')
+
+        let email = form.email.value
+        let password = form.password.value
+
+        let ldata = JSON.parse(localStorage.getItem('details'))
+
+        let find = false;
+        for(let i = 0;i<ldata.length;i++){
+        if(ldata[i].email === email && ldata[i].password === password){
+            find = true;
+            break;
+        }
+        else if(email=="" || password == ""){
+            alert("Fill The Form")
+            find = false;
+            break;
+        }
+        
+        }
+        if(find){
+            window.location.href = "menu.html"
+        }
+        else{
+            alert("invalid login")
+        }
+    }
+</script>
+</html>

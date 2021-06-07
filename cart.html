@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+    <style>
+     nav{
+            height: 40px;
+            width: 100vw;
+            margin: auto;
+            background-color: blue;
+
+        }
+        nav>div{
+            font-size: 20px;
+            float: right;
+            margin-right: 20px;
+        }
+          .image{
+            height: 100px;
+            width: 100px;
+        }
+        #menu_display{
+            width: 80vw;
+            margin: auto;
+            display: grid;
+            background-color: wheat;
+            grid-gap: 20px;
+            grid-template-columns: auto auto auto;
+        }
+        .card{
+            background-color: orange;
+            text-align: centre;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <button onclick="submit()">SubmitOrder</button>
+        <div>Login</div>
+        <div>Signup</div>
+        <div>Menu</div>
+    </nav>
+    <div id="data"></div>
+</body>
+
+<script>
+    let favdata = JSON.parse(localStorage.getItem("fav"));
+
+parent = document.getElementById("data")
+favdata.forEach(function(element){
+    
+            
+            let div = document.createElement("div");
+            div.setAttribute("class","card");
+
+            let pprice = document.createElement("p");
+            pprice.innerHTML = `Price: ${element.price}`;
+            pprice.setAttribute("class","name");
+
+            let pdes = document.createElement("p");
+        pdes.innerHTML = `Price: ${element.description}`;
+        pdes.setAttribute("class","des");
+
+            let ptime = document.createElement("p");
+            ptime.innerHTML = `Price: ${element.time}`;
+            ptime.setAttribute("class","tme");
+
+            let image = document.createElement("img");
+            image.src = ` ${element.image}`
+            image.setAttribute("class","image");
+
+           
+
+            div.append(pprice,pdes,ptime,image)
+            parent.append(div)
+
+        });
+        function submit(){
+            alert("Orderd Placed")
+        }
+
+</script>
+</html>

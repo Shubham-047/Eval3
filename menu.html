@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        nav{
+            height: 40px;
+            width: 100vw;
+            margin: auto;
+            background-color: blue;
+
+        }
+        nav>div{
+            font-size: 20px;
+            float: right;
+            margin-right: 20px;
+        }
+        .image{
+            height: 100px;
+            width: 100px;
+        }
+        #menu_display{
+            width: 80vw;
+            margin: auto;
+            display: grid;
+            background-color: wheat;
+            grid-gap: 20px;
+            grid-template-columns: auto auto auto;
+        }
+        .card{
+            background-color: orange;
+            text-align: centre;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <button onclick="goCart()">Go To Cart</button>
+        <div>Login</div>
+        <div>Signup</div>
+        <div>Menu</div>
+    </nav>
+    <div id="menu_display"></div>
+</body>
+<script>
+    const menulst = [
+       
+     {
+            price: 120,
+            description: "Dhosa",
+            time: "10min",
+            image: "https://i.ytimg.com/vi/GcEDrhMrSCw/hqdefault.jpg",
+
+        },
+         {
+            price: 100,
+            description: "Dhokla",
+            time: "20min",
+            image: "https://www.indianhealthyrecipes.com/wp-content/uploads/2020/10/khaman-dhokla.jpg",
+
+        },
+         {
+            price: 80,
+            description: "Idli",
+            time: "5min",
+            image: "https://www.indianhealthyrecipes.com/wp-content/uploads/2013/01/idli-recipe-1-500x500.jpg",
+
+        },
+         {
+            price: 150,
+            description: "Chicken Chiili",
+            time: "30min",
+            image: "https://c.ndtvimg.com/2020-01/tlauod6_chilli-chicken_625x300_21_January_20.jpg",
+
+        },
+         {
+            price: 300,
+            description: "Pzza",
+            time: "20min",
+            image: "https://static.toiimg.com/thumb/56933159.cms?imgsize=686279&width=800&height=800",
+
+        },
+         {
+            price: 330,
+            description: "Burger",
+            time: "18min",
+            image: "https://www.indianhealthyrecipes.com/wp-content/uploads/2016/02/veg-burger-recipe-1-500x500.jpg",
+
+        },
+
+    ];
+
+    if(localStorage.getItem("menulst") == null){
+        localStorage.setItem("menulst",JSON.stringify(menulst));
+    }
+
+    function menu(){
+       let men1 = JSON.parse(localStorage.getItem("menulst"));
+      // console.log(men1)
+
+        let parent = document.getElementById("menu_display")
+        parent.innerHTML = null;
+
+        men1.forEach(function(element) {
+            
+            let div = document.createElement("div");
+            div.setAttribute("class","card");
+
+            let pprice = document.createElement("p");
+            pprice.innerHTML = `Price: ${element.price}`;
+            pprice.setAttribute("class","name");
+
+            let pdes = document.createElement("p");
+        pdes.innerHTML = `Price: ${element.description}`;
+        pdes.setAttribute("class","des");
+
+            let ptime = document.createElement("p");
+            ptime.innerHTML = `Price: ${element.time}`;
+            ptime.setAttribute("class","tme");
+
+            let image = document.createElement("img");
+            image.src = ` ${element.image}`
+            image.setAttribute("class","image");
+
+            let btn = document.createElement("button")
+            btn.textContent = 'Add To Cart'
+            btn.style.display = 'block'
+
+            btn.onclick = function(){
+                addCart(element);
+            }
+
+            div.append(pprice,pdes,ptime,image,btn)
+            parent.append(div)
+
+        });
+
+    }
+    menu()
+
+
+    function addCart(element){
+        let arr ;
+
+        arr = JSON.parse(localStorage.getItem('fav'));
+
+        if(arr == null){
+            arr = [];
+        }
+        else{
+            arr = JSON.parse(localStorage.getItem('fav'))
+        }
+
+        var bol = false;
+        for(let i = 0; i<arr.length;i++){
+            if(arr[i].price === element.price){
+                bol = true;
+                break;
+            }
+        }
+
+        if(!bol){
+            arr.push(element)
+        }
+
+        localStorage.setItem('fav',JSON.stringify(arr))
+    }
+
+function goCart(){
+    window.location.href = "cart.html"
+}
+</script>
+</html>
